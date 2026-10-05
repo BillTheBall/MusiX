@@ -1,4 +1,5 @@
 function love.load()
+  love.filesystem.setIdentity("MusiXLogs")
   INIT = require("SRC.init")
 
   init:load()
