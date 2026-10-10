@@ -50,9 +50,8 @@ function theme.Label(text, opt, x, y, w, h)
 	love.graphics.printf(text, x + 2, y, w - 4, opt.align or "center")
 end
 
-function theme.Button(text, opt, x, y, w, h)
+function theme.duolingoButton(text, opt, x, y, w, h)
 	local c = theme.getColorForState(opt)
-
 
 	love.graphics.setFont(opt.font)
 	if not (opt.state == "normal") then
@@ -67,6 +66,31 @@ function theme.Button(text, opt, x, y, w, h)
 		love.graphics.setColor(c.fg)
 		y = y + theme.getVerticalOffsetForAlign(opt.valign, opt.font, h)
 		love.graphics.printf(text, x + 20, y, w - 4, opt.align or "center")
+	end
+end
+
+function theme.Button(text, type, opt, x, y, w, h)
+	local c = theme.getColorForState(opt)
+
+	love.graphics.setFont(opt.font)
+	if type == "duolingo" then
+		if not (opt.state == "normal") then
+			theme.drawBox(x, y + h * 0.1, w, h * 0.9, c, opt.cornerRadius)
+			love.graphics.setColor(c.fg)
+			y = y + theme.getVerticalOffsetForAlign(opt.valign, opt.font, h)
+			love.graphics.printf(text[1], x + 20, y + h * 0.1, w - 4, opt.align or "center")
+			love.graphics.printf(text[2], x + 20, y + h * 0.2, w - 4, opt.align or "center")
+		else
+			theme.drawBox(x, y, w, h, c, opt.cornerRadius)
+			theme.drawBox(x, y + h * 0.9, w, h * 0.1, theme.color["shadows"], opt.cornerRadius)
+
+			love.graphics.setColor(c.fg)
+			y = y + theme.getVerticalOffsetForAlign(opt.valign, opt.font, h)
+			love.graphics.printf(text[1], x + 20, y, w - 4, opt.align or "center")
+			love.graphics.printf(text[2], x + 20, y + h * 0.1, w - 4, opt.align or "center")
+		end
+	else
+		error("Not a valid type", 1)
 	end
 end
 
