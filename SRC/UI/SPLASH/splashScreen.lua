@@ -8,12 +8,14 @@ local text = {
   g = 123,
   b = 215
 }
+
+local logo = love.graphics.newImage("CONTENT/PROGRAM/MusiXLogo.png")
 function splash:load()
   timer = 2
   flux.to(text, 0.2, { firstalpha = 0 }):ease("linear"):delay(0.6)
-  flux.to(text, 0.2, { r = 23 }):ease("linear"):delay(0.8)
-  flux.to(text, 0.2, { g = 30 }):ease("linear"):delay(0.8)
-  flux.to(text, 0.2, { b = 38 }):ease("linear"):delay(0.8)
+  flux.to(text, 0.2, { r = 255 }):ease("linear"):delay(0.8)
+  flux.to(text, 0.2, { g = 255 }):ease("linear"):delay(0.8)
+  flux.to(text, 0.2, { b = 255 }):ease("linear"):delay(0.8)
   flux.to(text, 0.1, { alpha = 1 }):ease("linear"):delay(0.84)
 end
 
@@ -41,9 +43,9 @@ function splash:draw(dt)
   love.graphics.setColor(23 / 255, 30 / 255, 38 / 255)
   ]] --
   love.graphics.setColor(1, 1, 1, text.firstalpha)
-  love.graphics.rectangle('fill', Width * 0.4, Height * 0.4, Width * 0.2, Height * 0.2)
-  love.graphics.setColor(1, 1, 1, text.alpha)
-  love.graphics.print("MusiX", Width * 0.5 - 50, Height * 0.5, 0, 3)
+  love.graphics.draw(logo, Width * 0.4 - 10, Height * 0.4)
+  love.graphics.setColor(0, 0, 0, text.alpha)
+  love.graphics.print("MusiX", Width * 0.5 - 50, Height * 0.5 - 25, 0)
   love.graphics.setColor(1, 1, 1)
   suit.draw()
 end

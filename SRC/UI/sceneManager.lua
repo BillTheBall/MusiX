@@ -2,6 +2,12 @@ sceneManager = {}
 
 suit = require 'LIB/suit'
 flux = require 'LIB.flux.flux'
+Heading1 = love.graphics.newFont("CONTENT/EXTRA/Sourcerer-Regular.ttf", 40)
+Heading2 = love.graphics.newFont("CONTENT/EXTRA/Sourcerer-Regular.ttf", 28)
+Heading3 = love.graphics.newFont("CONTENT/EXTRA/Sourcerer-Regular.ttf", 24)
+Normal = love.graphics.newFont("CONTENT/EXTRA/Sourcerer-Regular.ttf", 20)
+SubText = love.graphics.newFont("CONTENT/EXTRA/Sourcerer-Regular.ttf", 14)
+love.graphics.setFont(Heading1)
 
 local SPLASH = require("SRC.UI.SPLASH.splashScreen")
 function sceneManager:load()
