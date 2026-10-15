@@ -2,7 +2,7 @@
 
 local BASE = (...):match('(.-)[^%.]+$')
 
-return function(core, text, type, ...)
+return function(core, text, type, colour, ...)
 	local opt, x, y, w, h = core.getOptionsAndSize(...)
 	opt.id = opt.id or text
 	opt.font = opt.font or love.graphics.getFont()
@@ -11,7 +11,7 @@ return function(core, text, type, ...)
 	h = h or opt.font:getHeight() + 4
 
 	opt.state = core:registerHitbox(opt.id, x, y, w, h)
-	core:registerDraw(opt.draw or core.theme.Button, type, text, opt, x, y, w, h)
+	core:registerDraw(opt.draw or core.theme.Button, type, text, opt, x, y, w, h, colour)
 
 	return {
 		id = opt.id,

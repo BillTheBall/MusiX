@@ -69,26 +69,30 @@ function theme.duolingoButton(text, opt, x, y, w, h)
 	end
 end
 
-function theme.Button(text, type, opt, x, y, w, h)
+function theme.Button(text, type, opt, x, y, w, h, colour)
 	local c = theme.getColorForState(opt)
+	theme.color = {
+		normal  = { bg = colour, fg = { 1, 1, 1 } },
+		hovered = { bg = colour, fg = { 1, 1, 1 } },
+		active  = { bg = { 0.19, 0.6, 0.73 }, fg = { 1, 1, 1 } },
+		shadows = { bg = { 1, 1, 1 }, fg = { 0, 0, 0 } }
+	}
 
 	love.graphics.setFont(opt.font)
-	if type == "duolingo" then
-		if not (opt.state == "normal") then
-			theme.drawBox(x, y + h * 0.1, w, h * 0.9, c, opt.cornerRadius)
-			love.graphics.setColor(c.fg)
-			y = y + theme.getVerticalOffsetForAlign(opt.valign, opt.font, h)
-			love.graphics.printf(text[1], x + 20, y + h * 0.1, w - 4, opt.align or "center")
-			love.graphics.printf(text[2], x + 20, y + h * 0.2, w - 4, opt.align or "center")
-		else
-			theme.drawBox(x, y, w, h, c, opt.cornerRadius)
-			theme.drawBox(x, y + h * 0.9, w, h * 0.1, theme.color["shadows"], opt.cornerRadius)
-
-			love.graphics.setColor(c.fg)
-			y = y + theme.getVerticalOffsetForAlign(opt.valign, opt.font, h)
-			love.graphics.printf(text[1], x + 20, y, w - 4, opt.align or "center")
-			love.graphics.printf(text[2], x + 20, y + h * 0.1, w - 4, opt.align or "center")
-		end
+	if type == "unit" then
+		theme.drawBox(x, y, w, h, c, opt.cornerRadius)
+		love.graphics.setLineWidth(2)
+		love.graphics.setColor(colour[1] - 20, colour[2] - 20, colour[3] - 20)
+		love.graphics.rectangle("line", x, y, w, h, theme.cornerRadius, theme.cornerRadius)
+		love.graphics.setLineWidth(1)
+		--theme.drawBox(x, y, w, h - h * 0.25, theme.color["shadows"], opt.cornerRadius)
+		y = y + theme.getVerticalOffsetForAlign(opt.valign, opt.font, h)
+		love.graphics.setColor(c.fg)
+		love.graphics.setFont(SubText)
+		love.graphics.printf(text[1], x, y - h * 0.5 + 20, w - 4, opt.align or "center")
+		love.graphics.setFont(SubText)
+		love.graphics.printf(text[2], x + 10, y + h * 0.5 + 10, w - 4, opt.align or "center")
+		love.graphics.setFont(Body)
 	else
 		error("Not a valid type", 1)
 	end
